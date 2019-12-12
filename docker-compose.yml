@@ -6,7 +6,7 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_DATABASE: ikapro
+      MYSQL_DATABASE: ikalist
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_USER: ikachan
       MYSQL_PASSWORD: ikagirl
