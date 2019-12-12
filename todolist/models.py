@@ -12,7 +12,10 @@ class Todo(models.Model):
     )
     title = models.CharField(max_length=32)
     finished_flag = models.BooleanField(default=False)
-    deadline = models.TimeField(null=True)
+    deadline = models.TimeField(
+        null=True,
+        blank=True,
+    )
     IMPORTANT = (
         ('0', 'Nothing'),
         ('1', 'Low'),
@@ -27,6 +30,7 @@ class Todo(models.Model):
     memo = models.CharField(
         max_length=255,
         null=True,
+        blank=True,
     )
 
 
@@ -38,7 +42,7 @@ class Label(models.Model):
     title = models.CharField(max_length=16)
     coler_code = models.CharField(
         max_length=7,
-        null=True
+        null=True,
     )
 
 
