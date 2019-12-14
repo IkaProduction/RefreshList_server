@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# rest_framework
+from todolist.urls import router as todolist_router
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('todolist.urls')),
+    path('api/', include(todolist_router.urls)),
 ]
