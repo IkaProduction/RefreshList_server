@@ -1,5 +1,5 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth import get_user_model
 
 # class [テーブル名](models.Model):
 #     フィールド名 = models.[適切な型]([オプション])
@@ -7,7 +7,7 @@ from django.conf import settings
 
 class Todo(models.Model):
     user_id = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        get_user_model(),
         on_delete=models.CASCADE,
     )
     title = models.CharField(max_length=32)
@@ -36,7 +36,7 @@ class Todo(models.Model):
 
 class Label(models.Model):
     user_id = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        get_user_model(),
         on_delete=models.CASCADE,
     )
     title = models.CharField(max_length=16)
