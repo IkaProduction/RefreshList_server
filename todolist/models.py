@@ -17,10 +17,10 @@ class Todo(models.Model):
         blank=True,
     )
     IMPORTANT = (
-        ('0', 'Nothing'),
-        ('1', 'Low'),
-        ('2', 'Medium'),
-        ('3', 'High'),
+        (0, 'Nothing'),
+        (1, 'Low'),
+        (2, 'Medium'),
+        (3, 'High'),
     )
     important = models.CharField(
         max_length=1,
