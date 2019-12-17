@@ -21,6 +21,5 @@ from todolist.urls import router as todolist_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('todolist.urls')),
     path('api/', include(todolist_router.urls)),
 ]
