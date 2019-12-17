@@ -6,6 +6,7 @@ from .models import User
 
 
 class UserAdmin(BaseUserAdmin):
+    # HACK(suzuki): form.pyに関連する項目のみ削除したら動いた（丸ごと消したらerrorになる）ので取り急ぎ動かす用。
     list_display = ('email', 'username', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
