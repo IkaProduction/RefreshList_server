@@ -23,7 +23,6 @@ class Todo(models.Model):
         (3, 'High'),
     )
     important = models.IntegerField(
-        max_length=1,
         choices=IMPORTANT,
         default=0,
     )
