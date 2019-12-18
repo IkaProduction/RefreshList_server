@@ -1,8 +1,13 @@
 from django.urls import path
-from .views import ListTodo, DetailTodo, ListLabel
+from .views import TodoViewSet, LabelViewSet
+from rest_framework import routers
 
 urlpatterns = [
-    path('todos/<int:pk>/', DetailTodo.as_view()),
-    path('todos/', ListTodo.as_view()),
-    path('labels/', ListLabel.as_view()),
 ]
+
+router = routers.SimpleRouter()
+router.register('todos', TodoViewSet)
+router.register('labels', LabelViewSet)
+
+# todo: user関連のSerializer設定
+# router.register('users', UserViewSet)
