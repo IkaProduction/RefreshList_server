@@ -5,7 +5,7 @@ from todolist.models import Todo, Label
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields = ('user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo')
+        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo')
 
 
 class LabelSerializer(serializers.ModelSerializer):
