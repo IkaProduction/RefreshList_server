@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'todolist.apps.TodolistConfig',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ikalist',
-        'USER': 'root',
-        'PASSWORD': 'secret',
+        'USER': 'ikachan',
+        'PASSWORD': 'ikagirl',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
