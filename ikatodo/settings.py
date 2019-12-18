@@ -83,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ikalist',
-        'USER': 'root',
-        'PASSWORD': 'secret',
+        'USER': 'ikachan',
+        'PASSWORD': 'ikagirl',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
