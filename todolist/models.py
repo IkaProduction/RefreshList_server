@@ -22,7 +22,7 @@ class Todo(models.Model):
         (2, 'Medium'),
         (3, 'High'),
     )
-    important = models.CharField(
+    important = models.IntegerField(
         max_length=1,
         choices=IMPORTANT,
         default=0,
