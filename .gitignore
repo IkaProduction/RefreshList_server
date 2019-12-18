@@ -170,3 +170,4 @@ dmypy.json
 
 # mysql
 sql/
+migrations/
