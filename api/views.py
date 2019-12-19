@@ -1,5 +1,6 @@
 from todolist.models import Todo, Label
-from .serializers import TodoSerializer, LabelSerializer
+from users.models import User
+from .serializers import TodoSerializer, LabelSerializer, UserSerializer
 from rest_framework import viewsets
 
 
@@ -11,6 +12,11 @@ class TodoViewSet(viewsets.ModelViewSet):
 class LabelViewSet(viewsets.ModelViewSet):
     queryset = Label.objects.all()
     serializer_class = LabelSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 # todo: user関連のSerializer設定を一旦オミット。ユーザー登録、ログイン、ログアウトの実装に併せて修正か削除します。
