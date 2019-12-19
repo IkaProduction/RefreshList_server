@@ -15,8 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-# rest_framework
 from api.urls import router as api_router
 
 urlpatterns = [
