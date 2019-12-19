@@ -17,9 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 # rest_framework
-from todolist.urls import router as todolist_router
+from api.urls import router as api_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(todolist_router.urls)),
+    path('api/', include(api_router.urls)),
 ]
