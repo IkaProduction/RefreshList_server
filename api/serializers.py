@@ -1,8 +1,6 @@
 from rest_framework import serializers
 from todolist.models import Todo, Label
-from users.models import UserManager
-from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import make_password
+from users.models import User
 
 
 class TodoSerializer(serializers.ModelSerializer):
@@ -21,13 +19,11 @@ class LabelSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = get_user_model()
+        model = User
         fields = ('email', 'username', 'password')
         extra_kwargs = {
             'password': {'write_only': True},  # 'password'は読み取り専用
         }
 
     def create(self, validated_data):
-        password = validated_data.get('password')  # 入力データから'password'の値を読み取り
-        validated_data['password'] = make_password(password)  # ハッシュ化した'password'を格納
-        return UserManager.create_user(self, **validated_data)  # 入力データを引数にuser作成を実行
+        return User.objects.create_user(**validated_data)  # 入力データを引数にuser作成を実行
