@@ -4,7 +4,7 @@ from rest_framework import routers
 
 urlpatterns = []
 
-router = routers.SimpleRouter()
+router = routers.DefaultRouter()
 router.register('todos', TodoViewSet)
 router.register('labels', LabelViewSet)
 

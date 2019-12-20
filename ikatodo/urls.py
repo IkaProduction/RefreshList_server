@@ -21,5 +21,5 @@ from api import auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_router.urls)),
-    path('api/sign/', auth_views.sign_in)
+    path('api/sign_up/', auth_views.sign_in)
 ]
