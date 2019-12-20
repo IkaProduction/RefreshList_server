@@ -1,6 +1,6 @@
 from todolist.models import Todo, Label
 from .serializers import TodoSerializer, LabelSerializer, UserSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from django.contrib.auth import get_user_model
 
 
@@ -15,5 +15,10 @@ class LabelViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+
+
+class UserCreateView(generics.CreateAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
