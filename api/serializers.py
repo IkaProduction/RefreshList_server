@@ -22,8 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('email', 'username', 'password')
         extra_kwargs = {
-            'password': {'write_only': True},  # 'password'は読み取り専用
+            'password': {'write_only': True},  # NOTE:passwordは書き込みのみを許可
         }
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)  # 入力データを引数にuser作成を実行
+        return User.objects.create_user(**validated_data)  # NOTE:入力データを引数にuser作成を実行
