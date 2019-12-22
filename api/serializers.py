@@ -7,14 +7,14 @@ class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
         fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo')
-        read_only_fields = ['id', 'user_id']
+        read_only_fields = ['id']
 
 
 class LabelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Label
-        fields = ('title', 'coler_code')
-        read_only_fields = ['User_id']
+        fields = ('id', 'user_id', 'title', 'coler_code')
+        read_only_fields = ['id']
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('email', 'username', 'password')
         extra_kwargs = {
-            'password': {'write_only': True},  # NOTE: passwordは読み取り専用
+            'password': {'write_only': True},  # NOTE: passwordは書き込みのみを許可
         }
 
     def create(self, validated_data):

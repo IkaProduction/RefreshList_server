@@ -11,7 +11,6 @@ router.register('users', UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('sign_up/', UserCreateView.as_view()),
+    path('sign-up/', UserCreateView.as_view()),
     path('login-check/', CheckView.as_view()),  # FIXME: ログインチェック用
     path('login-session/', SessionView.as_view()),  # FIXME: ユーザー認証をしてセッションIDを発行
-]
