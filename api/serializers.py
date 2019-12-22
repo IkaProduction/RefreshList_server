@@ -13,8 +13,8 @@ class TodoSerializer(serializers.ModelSerializer):
 class LabelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Label
-        fields = ('user_id', 'title', 'coler_code')
-        read_only_fields = ['user_id']
+        fields = ('id', 'user_id', 'title', 'coler_code')
+        read_only_fields = ['id', 'user_id']
 
 
 class UserSerializer(serializers.ModelSerializer):
