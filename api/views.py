@@ -6,7 +6,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 class TodoViewSet(viewsets.ModelViewSet):
@@ -50,4 +50,10 @@ class LoginView(APIView):  # NOTE:ユーザー認証が完了するとセッシ�
             login(request, user)
             return Response({'session': request.session.session_key})
 
-# TODO: ログアウト処理を書く
+
+class LogoutView(APIView):
+    permission_classes = (AllowAny, )  # NOTE:認証不要
+
+    def get(self, request):
+        logout(request)
+        return Response({'session': 'logout'})
