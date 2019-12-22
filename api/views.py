@@ -5,6 +5,7 @@ from rest_framework import viewsets, generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import authenticate, login
 
 
@@ -26,17 +27,20 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 class UserCreateView(generics.CreateAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
+    permission_classes = (AllowAny, )  # NOTE:認証不要
 
 
 class CheckView(APIView):  # NOTE:セッション確認
     authentication_classes = (SessionAuthentication, )
+    permission_classes = (IsAuthenticated, )  # NOTE:認証済みユーザーのみアクセス許可
 
     def get(self, request, format=None):
         content = {'user': str(request.user), 'auth': str(request.auth)}
         return Response(content)
 
 
-class SessionView(APIView):  # NOTE:ユーザー認証が完了するとセッションIDが返答される
+class LoginView(APIView):  # NOTE:ユーザー認証が完了するとセッションIDが返答される
+    permission_classes = (AllowAny, )  # NOTE:認証不要
 
     def post(self, request):
         email = request.data['email']
