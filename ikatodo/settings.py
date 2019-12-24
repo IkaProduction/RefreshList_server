@@ -31,10 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # NOTE:startapp
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'todolist.apps.TodolistConfig',
+    # NOTE:3rd party packages
     'rest_framework',
+    'django_filters',
+    # NOTE:default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,8 +57,8 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',  # NOTE: 標準で全てのCRUDが認証必須
-    ]
+        'rest_framework.permissions.IsAuthenticated',  # NOTE:標準で全てのCRUDが認証必須
+    ],
 }
 
 MIDDLEWARE = [
