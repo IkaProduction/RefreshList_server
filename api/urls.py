@@ -11,8 +11,8 @@ router.register('users', UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('sign-up/', UserCreateView.as_view()),  # NOTE: ユーザー作成
-    path('login/', LoginView.as_view()),  # NOTE: ユーザー認証をしてセッションIDを発行
-    path('logout/', LogoutView.as_view()),  # NOTE: ログアウト
-    path('user-check/', CheckView.as_view()),  # NOTE: セッションとユーザー確認用
+    path('sign-up/', UserCreateView.as_view()),  # NOTE:ユーザー作成
+    path('login/', LoginView.as_view()),  # NOTE:ユーザー認証をしてセッションIDを発行
+    path('logout/', LogoutView.as_view()),  # NOTE:ログアウト
+    path('user-check/', CheckView.as_view()),  # NOTE:セッションとユーザー確認用
 ]
