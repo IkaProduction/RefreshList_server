@@ -8,6 +8,7 @@ router = routers.DefaultRouter()
 router.register('todos', TodoViewSet)
 router.register('labels', LabelViewSet)
 router.register('users', UserViewSet)
+router.register('todolist', TodoListView)
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -15,5 +16,4 @@ urlpatterns = [
     path('login/', LoginView.as_view()),  # NOTE:ユーザー認証をしてセッションIDを発行
     path('logout/', LogoutView.as_view()),  # NOTE:ログアウト
     path('user-check/', CheckView.as_view()),  # NOTE:セッションとユーザー確認用
-    path('todo-list/', TodoListView.as_view()),  # NOTE:ログインユーザーに絞り込んだTODO一覧API
 ]

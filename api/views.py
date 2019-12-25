@@ -1,18 +1,23 @@
 from todolist.models import Todo, Label
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from .serializers import TodoSerializer, LabelSerializer, UserSerializer
 from rest_framework import viewsets, generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from django.contrib.auth import authenticate, login, logout
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
+    filter_fields = ['user_id']  # NOTE:URLのqueryでフィルタリング出来る項目
+
+
+class TodoListView(viewsets.ViewSet):  # FIXME: viewsetを変えてテスト
+    serializer_class = TodoSerializer
+    queryset = Todo.objects.filter()
+    filter_fields = ['user_id']
 
 
 class LabelViewSet(viewsets.ModelViewSet):
@@ -58,10 +63,3 @@ class LogoutView(APIView):
     def get(self, request):
         logout(request)
         return Response({'session': 'logout'})
-
-
-class TodoListView(generics.ListAPIView):
-    serializer_class = TodoSerializer
-    queryset = Todo.objects.filter()
-    filter_backends = [DjangoFilterBackend]
-    filter_fields = ['user_id']
