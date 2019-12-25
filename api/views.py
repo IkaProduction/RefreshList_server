@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import authenticate, login, logout
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class TodoViewSet(viewsets.ModelViewSet):
@@ -57,3 +58,10 @@ class LogoutView(APIView):
     def get(self, request):
         logout(request)
         return Response({'session': 'logout'})
+
+
+class TodoListView(generics.ListAPIView):
+    serializer_class = TodoSerializer
+    queryset = Todo.objects.filter()
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['user_id']

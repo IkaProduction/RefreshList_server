@@ -1,6 +1,6 @@
 from django.conf.urls import include
 from django.urls import path
-from .views import TodoViewSet, LabelViewSet, UserViewSet, UserCreateView, CheckView, LoginView, LogoutView
+from .views import TodoViewSet, LabelViewSet, UserViewSet, UserCreateView, CheckView, LoginView, LogoutView, TodoListView
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -15,4 +15,5 @@ urlpatterns = [
     path('login/', LoginView.as_view()),  # NOTE: ユーザー認証をしてセッションIDを発行
     path('logout/', LogoutView.as_view()),  # NOTE: ログアウト
     path('user-check/', CheckView.as_view()),  # NOTE: セッションとユーザー確認用
+    path('todo-list/', TodoListView.as_view()),  # NOTE: ログインユーザーに絞り込んだTODO一覧API
 ]

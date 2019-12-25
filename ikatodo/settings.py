@@ -59,6 +59,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',  # NOTE:標準で全てのCRUDが認証必須
     ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',  # NOTE:フィルタリング機能の有効化
+    ],
 }
 
 MIDDLEWARE = [
