@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 router.register('todos', TodoViewSet)
 router.register('labels', LabelViewSet)
 router.register('users', UserViewSet)
-router.register('todolist', TodoListView)
+router.register('todolist', TodoListView)  # NOTE:テスト用
 
 urlpatterns = [
     path('', include(router.urls)),

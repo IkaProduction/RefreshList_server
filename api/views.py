@@ -6,18 +6,23 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from .permission import IsUserOnly
 
 
 class TodoViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsUserOnly, )  # NOTE:todoのユーザーIDとログインユーザーが一致した場合のみrequestを受け付けるパーミッション
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+
+    def get_queryset(self):
+        return Todo.objects.filter(user_id=self.request.user)  # NOTE:ログインユーザーのIDでフィルタリング表示
+
+
+class TodoListView(viewsets.ModelViewSet):  # FIXME: todo操作の確認用
+    permission_classes = (AllowAny, )  # NOTE:認証不要
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
     filter_fields = ['user_id']  # NOTE:URLのqueryでフィルタリング出来る項目
-
-
-class TodoListView(viewsets.ViewSet):  # FIXME: viewsetを変えてテスト
-    serializer_class = TodoSerializer
-    queryset = Todo.objects.filter()
-    filter_fields = ['user_id']
 
 
 class LabelViewSet(viewsets.ModelViewSet):
