@@ -48,7 +48,7 @@ class LoginView(APIView):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return Response({'session': request.session.session_key})  # NOTE:ユーザー認証が完了するとセッションIDが返答される
+            return Response({"session": request.session.session_key})  # NOTE:ユーザー認証が完了するとセッションIDが返答される
 
 
 class LogoutView(APIView):
@@ -56,4 +56,4 @@ class LogoutView(APIView):
 
     def get(self, request):
         logout(request)
-        return Response({'session': 'ログアウトしました。'})
+        return Response({"session": 'ログアウトしました。'})
