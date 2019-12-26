@@ -1,12 +1,12 @@
-from todolist.models import Todo, Label
-from django.contrib.auth import get_user_model, authenticate, login, logout
-from .serializers import TodoSerializer, LabelSerializer, UserSerializer
-from rest_framework import viewsets, generics
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from .permission import IsUserOnly
+from rest_framework import generics, viewsets
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import TodoSerializer, LabelSerializer, UserSerializer
+from todolist.models import Todo, Label
 
 
 class TodoViewSet(viewsets.ModelViewSet):
@@ -41,7 +41,8 @@ class UserCreateView(generics.CreateAPIView):
     permission_classes = (AllowAny, )  # NOTE:認証不要
 
 
-class CheckView(APIView):  # NOTE:セッション確認
+# NOTE:セッション確認
+class CheckView(APIView):
     authentication_classes = (SessionAuthentication, )
     permission_classes = (IsAuthenticated, )  # NOTE:認証済みユーザーのみアクセス許可
 
@@ -50,7 +51,7 @@ class CheckView(APIView):  # NOTE:セッション確認
         return Response(content)
 
 
-class LoginView(APIView):  # NOTE:ユーザー認証が完了するとセッションIDが返答される
+class LoginView(APIView):
     permission_classes = (AllowAny, )  # NOTE:認証不要
 
     def post(self, request):
@@ -59,7 +60,7 @@ class LoginView(APIView):  # NOTE:ユーザー認証が完了するとセッシ�
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return Response({'session': request.session.session_key})
+            return Response({"session": request.session.session_key})  # NOTE:ユーザー認証が完了するとセッションIDが返答される
 
 
 class LogoutView(APIView):
@@ -67,4 +68,4 @@ class LogoutView(APIView):
 
     def get(self, request):
         logout(request)
-        return Response({'session': 'logout'})
+        return Response({"session": 'ログアウトしました。'})
