@@ -1,5 +1,4 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from .permission import IsUserOnly
 from rest_framework import generics, viewsets
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -10,7 +9,6 @@ from todolist.models import Todo, Label
 
 
 class TodoViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsUserOnly, )  # NOTE:todoのユーザーIDとログインユーザーが一致した場合のみrequestを受け付けるパーミッション
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
 
