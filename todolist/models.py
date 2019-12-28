@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -6,6 +7,11 @@ from django.contrib.auth import get_user_model
 
 
 class Todo(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
     user_id = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
@@ -34,6 +40,11 @@ class Todo(models.Model):
 
 
 class Label(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
     user_id = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
@@ -46,6 +57,11 @@ class Label(models.Model):
 
 
 class Todo_Label(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
     todo_id = models.ForeignKey(
         Todo,
         on_delete=models.CASCADE,
