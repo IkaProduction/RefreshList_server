@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from .permissions import IsOwnerOnly
 from rest_framework import generics, viewsets
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -14,6 +15,13 @@ class TodoViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Todo.objects.filter(user_id=self.request.user)  # NOTE:ログインユーザーのIDでフィルタリング表示
+
+    def get_permissions(self):
+        if self.action == 'list':  # NOTE:レコード一覧を取得するGETの場合
+            permission_classes = [IsAuthenticated]
+        else:  # NOTE:その他全て
+            permission_classes = [IsOwnerOnly]
+        return [permission() for permission in permission_classes]
 
 
 class TodoListView(viewsets.ModelViewSet):  # FIXME: todo操作の確認用
