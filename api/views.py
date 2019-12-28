@@ -27,6 +27,9 @@ class LabelViewSet(viewsets.ModelViewSet):
     queryset = Label.objects.all()
     serializer_class = LabelSerializer
 
+    def get_queryset(self):
+        return Todo.objects.filter(user_id=self.request.user)  # NOTE:ログインユーザーのIDでフィルタリング表示
+
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = get_user_model().objects.all()
