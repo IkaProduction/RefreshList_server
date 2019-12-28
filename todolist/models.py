@@ -12,7 +12,7 @@ class Todo(models.Model):
         default=uuid.uuid4,
         editable=False,
     )
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
     )
@@ -45,7 +45,7 @@ class Label(models.Model):
         default=uuid.uuid4,
         editable=False,
     )
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
     )
@@ -62,11 +62,11 @@ class Todo_Label(models.Model):
         default=uuid.uuid4,
         editable=False,
     )
-    todo_id = models.ForeignKey(
+    todo = models.ForeignKey(
         Todo,
         on_delete=models.CASCADE,
     )
-    label_id = models.ForeignKey(
+    label = models.ForeignKey(
         Label,
         on_delete=models.CASCADE,
     )
