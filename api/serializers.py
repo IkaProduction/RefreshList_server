@@ -6,14 +6,14 @@ from users.models import User
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo')
+        fields = ('id', 'user', 'title', 'finished_flag', 'deadline', 'important', 'memo')
         read_only_fields = ['id']
 
 
 class LabelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Label
-        fields = ('id', 'user_id', 'title', 'coler_code')
+        fields = ('id', 'user', 'title', 'coler_code')
         read_only_fields = ['id']
 
 
