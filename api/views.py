@@ -24,7 +24,8 @@ class TodoViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
-class TodoListView(viewsets.ModelViewSet):  # FIXME: todo操作の確認用
+# NOTE:ユーザー制限のあるTodo一覧との比較用
+class TodoListView(viewsets.ModelViewSet):
     permission_classes = (AllowAny, )  # NOTE:認証不要
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
