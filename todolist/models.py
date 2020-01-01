@@ -31,6 +31,11 @@ class Todo(models.Model):
         null=True,
         blank=True,
     )
+    labels = models.ManyToManyField(
+        "Label",
+        blank=True,
+        null=True,
+    )
 
 
 class Label(models.Model):
@@ -45,6 +50,7 @@ class Label(models.Model):
     )
 
 
+# FIXME:中間テーブルは自動生成される為、独自のパラメータを持たせない場合は明示不要。
 class Todo_Label(models.Model):
     todo_id = models.ForeignKey(
         Todo,

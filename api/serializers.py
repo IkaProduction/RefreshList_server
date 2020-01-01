@@ -4,9 +4,11 @@ from users.models import User
 
 
 class TodoSerializer(serializers.ModelSerializer):
+    labels = serializers.StringRelatedField
+
     class Meta:
         model = Todo
-        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo')
+        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo', 'labels')
         read_only_fields = ['id']
 
 
