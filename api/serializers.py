@@ -3,19 +3,19 @@ from todolist.models import Todo, Label
 from users.models import User
 
 
-class TodoSerializer(serializers.ModelSerializer):
-    labels = serializers.StringRelatedField
-
-    class Meta:
-        model = Todo
-        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo', 'labels')
-        read_only_fields = ['id']
-
-
 class LabelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Label
         fields = ('id', 'user_id', 'title', 'coler_code')
+        read_only_fields = ['id']
+
+
+class TodoSerializer(serializers.ModelSerializer):
+    labels = LabelSerializer()
+
+    class Meta:
+        model = Todo
+        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo', 'labels')
         read_only_fields = ['id']
 
 

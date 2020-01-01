@@ -38,6 +38,7 @@ class Todo(models.Model):
     )
 
 
+# FIXME:'user_id'をモデルで引いているので、フィールドのリレーにシリアライザーを使うとエラーが出る
 class Label(models.Model):
     user_id = models.ForeignKey(
         get_user_model(),
