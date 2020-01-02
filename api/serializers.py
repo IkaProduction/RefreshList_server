@@ -11,16 +11,22 @@ class LabelSerializer(serializers.ModelSerializer):
 
 
 class TodoSerializer(serializers.ModelSerializer):
-    # NOTE:get専用主キー指定
-    # labels = serializers.StringRelatedField()
-    # NOTE:post可能主キー指定
-    # labels = serializers.PrimaryKeyRelatedField(queryset=Label.objects.filter(), many=True)
-    # NOTE:ネスト表示だがgetしか出来ない
-    labels = LabelSerializer(many=True, read_only=True)
+    # NOTE:list時にカラム表示
+    labels = LabelSerializer(
+        many=True,
+        read_only=True,
+    )
+    # NOTE:書き込み時は主キー指定
+    labels_id = serializers.PrimaryKeyRelatedField(
+        source='labels',
+        queryset=Label.objects.filter(),  # FIXME:user_idによるフィルタリング
+        many=True,
+        write_only=True,
+    )
 
     class Meta:
         model = Todo
-        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo', 'labels')
+        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo', 'labels', 'labels_id')
         read_only_fields = ['id']
 
 
