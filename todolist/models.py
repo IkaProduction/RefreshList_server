@@ -48,7 +48,6 @@ class Todo(models.Model):
     labels = models.ManyToManyField(
         Label,
         blank=True,
-        null=True,
     )
 
 
