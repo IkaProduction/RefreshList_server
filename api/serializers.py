@@ -11,7 +11,7 @@ class LabelSerializer(serializers.ModelSerializer):
 
 
 class TodoSerializer(serializers.ModelSerializer):
-    labels = LabelSerializer()
+    labels = LabelSerializer(read_only=True)
 
     class Meta:
         model = Todo

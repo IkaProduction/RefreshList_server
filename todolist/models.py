@@ -1,8 +1,22 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+
 # class [テーブル名](models.Model):
 #     フィールド名 = models.[適切な型]([オプション])
+
+
+# FIXME:'user_id'をモデルで引いているので、フィールドのリレーにシリアライザーを使うとエラーが出る
+class Label(models.Model):
+    user_id = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+    )
+    title = models.CharField(max_length=16)
+    coler_code = models.CharField(
+        max_length=7,
+        null=True,
+    )
 
 
 class Todo(models.Model):
@@ -32,21 +46,8 @@ class Todo(models.Model):
         blank=True,
     )
     labels = models.ManyToManyField(
-        "Label",
+        Label,
         blank=True,
-        null=True,
-    )
-
-
-# FIXME:'user_id'をモデルで引いているので、フィールドのリレーにシリアライザーを使うとエラーが出る
-class Label(models.Model):
-    user_id = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE,
-    )
-    title = models.CharField(max_length=16)
-    coler_code = models.CharField(
-        max_length=7,
         null=True,
     )
 
