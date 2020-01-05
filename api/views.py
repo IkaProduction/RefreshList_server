@@ -37,7 +37,14 @@ class LabelViewSet(viewsets.ModelViewSet):
     serializer_class = LabelSerializer
 
     def get_queryset(self):
-        return Todo.objects.filter(user_id=self.request.user)  # NOTE:ログインユーザーのIDでフィルタリング表示
+        return Label.objects.filter(user_id=self.request.user)  # NOTE:ログインユーザーのIDでフィルタリング表示
+
+    def get_permissions(self):
+        if self.action == 'list':  # NOTE:レコード一覧を取得するGETの場合
+            permission_classes = [IsAuthenticated]
+        else:  # NOTE:その他全て
+            permission_classes = [IsOwnerOnly]
+        return [permission() for permission in permission_classes]
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
