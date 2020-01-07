@@ -1,6 +1,6 @@
 from django.conf.urls import include
 from django.urls import path
-from .views import TodoViewSet, LabelViewSet, UserViewSet, UserCreateView, CheckView, LoginView, LogoutView
+from .views import TodoViewSet, LabelViewSet, UserViewSet, UserCreateView, CheckView, LoginView, LogoutView, TodoListView
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -8,6 +8,7 @@ router = routers.DefaultRouter()
 router.register('todos', TodoViewSet)
 router.register('labels', LabelViewSet)
 router.register('users', UserViewSet)
+router.register('todolist', TodoListView)  # NOTE:テスト用
 
 urlpatterns = [
     path('', include(router.urls)),

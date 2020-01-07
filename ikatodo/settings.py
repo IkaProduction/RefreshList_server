@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'todolist.apps.TodolistConfig',
     # NOTE:3rd party packages
     'rest_framework',
+    'django_filters',
     # NOTE:default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,7 +58,10 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',  # NOTE:標準で全てのCRUDが認証必須
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',  # NOTE:フィルタリング機能の有効化
+    ],
 }
 
 MIDDLEWARE = [
