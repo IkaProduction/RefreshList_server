@@ -19,7 +19,7 @@ class TodoSerializer(serializers.ModelSerializer):
     # NOTE:書き込み時は主キー指定
     labels_id = serializers.PrimaryKeyRelatedField(
         source='labels',
-        queryset=Label.objects.filter(),  # FIXME:user_idによるフィルタリング
+        queryset=Label.objects.all(),
         many=True,
         write_only=True,
     )
