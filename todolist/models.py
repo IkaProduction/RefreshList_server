@@ -44,15 +44,3 @@ class Todo(models.Model):
         Label,
         blank=True,
     )
-
-
-# FIXME:中間テーブルは自動生成される為、独自のパラメータを持たせない場合は明示不要。
-class Todo_Label(models.Model):
-    todo_id = models.ForeignKey(
-        Todo,
-        on_delete=models.CASCADE,
-    )
-    label_id = models.ForeignKey(
-        Label,
-        on_delete=models.CASCADE,
-    )
