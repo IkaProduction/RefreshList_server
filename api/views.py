@@ -1,9 +1,10 @@
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from rest_framework import viewsets, generics
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from .permissions import IsOwnerOnly
+from rest_framework import generics, viewsets
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.views import APIView
 from .serializers import TodoSerializer, LabelSerializer, UserSerializer
 from todolist.models import Todo, Label
 
@@ -12,10 +13,38 @@ class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
 
+    def get_queryset(self):
+        return Todo.objects.filter(user_id=self.request.user)  # NOTE:ログインユーザーのIDでフィルタリング表示
+
+    def get_permissions(self):
+        if self.action == 'list':  # NOTE:レコード一覧を取得するGETの場合
+            permission_classes = [IsAuthenticated]
+        else:  # NOTE:その他全て
+            permission_classes = [IsOwnerOnly]
+        return [permission() for permission in permission_classes]
+
+
+# NOTE:ユーザー制限のあるTodo一覧との比較用
+class TodoListView(viewsets.ModelViewSet):
+    permission_classes = (AllowAny, )  # NOTE:認証不要
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+    filter_fields = ['user_id']  # NOTE:URLのqueryでフィルタリング出来る項目
+
 
 class LabelViewSet(viewsets.ModelViewSet):
     queryset = Label.objects.all()
     serializer_class = LabelSerializer
+
+    def get_queryset(self):
+        return Label.objects.filter(user_id=self.request.user)  # NOTE:ログインユーザーのIDでフィルタリング表示
+
+    def get_permissions(self):
+        if self.action == 'list':  # NOTE:レコード一覧を取得するGETの場合
+            permission_classes = [IsAuthenticated]
+        else:  # NOTE:その他全て
+            permission_classes = [IsOwnerOnly]
+        return [permission() for permission in permission_classes]
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
