@@ -11,6 +11,7 @@ class Label(models.Model):
     coler_code = models.CharField(
         max_length=7,
         null=True,
+        blank=True,
     )
 
 
@@ -33,7 +34,6 @@ class Todo(models.Model):
             (3, 'High'),
         ),
         default=0,
-        blank=True,
     )
     memo = models.CharField(
         max_length=255,
@@ -42,5 +42,4 @@ class Todo(models.Model):
     )
     labels = models.ManyToManyField(
         Label,
-        blank=True,
     )
