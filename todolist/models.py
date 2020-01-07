@@ -25,15 +25,15 @@ class Todo(models.Model):
         null=True,
         blank=True,
     )
-    IMPORTANT = (
-        (0, 'Nothing'),
-        (1, 'Low'),
-        (2, 'Medium'),
-        (3, 'High'),
-    )
     important = models.IntegerField(
-        choices=IMPORTANT,
+        choices=(
+            (0, 'Nothing'),
+            (1, 'Low'),
+            (2, 'Medium'),
+            (3, 'High'),
+        ),
         default=0,
+        blank=True,
     )
     memo = models.CharField(
         max_length=255,
