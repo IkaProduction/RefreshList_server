@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 
 
 class Label(models.Model):
@@ -42,4 +42,10 @@ class Todo(models.Model):
     )
     labels = models.ManyToManyField(
         Label,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(
+        blank=True,
+        null=True,
     )
