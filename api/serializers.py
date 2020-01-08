@@ -3,17 +3,30 @@ from todolist.models import Todo, Label
 from users.models import User
 
 
-class TodoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Todo
-        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo')
-        read_only_fields = ['id']
-
-
 class LabelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Label
-        fields = ('id', 'user_id', 'title', 'coler_code')
+        fields = ('id', 'user_id', 'title', 'color_code')
+        read_only_fields = ['id']
+
+
+class TodoSerializer(serializers.ModelSerializer):
+    # NOTE:list時にカラム表示
+    labels = LabelSerializer(
+        many=True,
+        read_only=True,
+    )
+    # NOTE:書き込み時は主キー指定
+    labels_id = serializers.PrimaryKeyRelatedField(
+        source='labels',
+        queryset=Label.objects.all(),
+        many=True,
+        write_only=True,
+    )
+
+    class Meta:
+        model = Todo
+        fields = ('id', 'user_id', 'title', 'finished_flag', 'deadline', 'important', 'memo', 'labels', 'labels_id')
         read_only_fields = ['id']
 
 
