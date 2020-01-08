@@ -8,7 +8,7 @@ class Label(models.Model):
         on_delete=models.CASCADE,
     )
     title = models.CharField(max_length=16)
-    coler_code = models.CharField(
+    color_code = models.CharField(
         max_length=7,
         null=True,
         blank=True,

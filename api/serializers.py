@@ -6,7 +6,7 @@ from users.models import User
 class LabelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Label
-        fields = ('id', 'user_id', 'title', 'coler_code')
+        fields = ('id', 'user_id', 'title', 'color_code')
         read_only_fields = ['id']
 
 
