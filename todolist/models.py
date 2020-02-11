@@ -13,6 +13,12 @@ class Label(models.Model):
         null=True,
         blank=True,
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(
+        blank=True,
+        null=True,
+    )
 
 
 class Todo(models.Model):
